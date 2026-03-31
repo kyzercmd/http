@@ -36,4 +36,5 @@ func (t Template) Execute (w http.ResponseWriter, data interface{}){
 		http.Error(w, "Error executing", http.StatusInternalServerError)
 		return
 	}
+	
 }
