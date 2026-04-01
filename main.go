@@ -20,15 +20,10 @@ func main() {
 	r.Use(middleware.Logger)
 
 	//Parsing templates
-	homeTmpl, err := views.ParseTemplate(filepath.Join("templates", "home.gohtml"))
-	if err != nil {
-		panic(err)
-	}
-	contactTmpl, err := views.ParseTemplate(filepath.Join("templates", "contact.gohtml"))
-	if err != nil {
-		panic(err)
-	}
-
+	homeTmpl := views.Must(views.ParseTemplate(filepath.Join("templates", "home.gohtml"))) 
+	
+	contactTmpl := views.Must(views.ParseTemplate(filepath.Join("templates", "contact.gohtml")))
+	
 	//Patterns and handlerFunctions for those patterns
 	r.Get("/", controllers.HomeHandler(homeTmpl))
 	r.Get("/contact", controllers.ContactHandler(contactTmpl))
@@ -41,7 +36,7 @@ func main() {
 
 	//Start server on port 3333
 	fmt.Println("Starting server...")
-	err = http.ListenAndServe(":3333", r)
+	err := http.ListenAndServe(":3333", r)
 	if err != nil {
 		panic(err)
 	}
