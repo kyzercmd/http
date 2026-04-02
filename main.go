@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"path/filepath"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/kyzercmd/http/controllers"
+	"github.com/kyzercmd/http/templates"
 	"github.com/kyzercmd/http/views"
 )
 
@@ -20,11 +20,11 @@ func main() {
 	r.Use(middleware.Logger)
 
 	//Parsing templates
-	homeTmpl := views.Must(views.ParseTemplate(filepath.Join("templates", "home.gohtml"))) 
+	homeTmpl := views.Must(views.ParseFS(templates.FS, "home.gohtml"))
 	
-	contactTmpl := views.Must(views.ParseTemplate(filepath.Join("templates", "contact.gohtml")))
+	contactTmpl := views.Must(views.ParseFS(templates.FS, "contact.gohtml"))
 
-	aboutTmpl := views.Must(views.ParseTemplate(filepath.Join("templates", "about.gohtml")))
+	aboutTmpl := views.Must(views.ParseFS(templates.FS, "about.gohtml"))
 	
 	//Patterns and handlerFunctions for those patterns
 	r.Get("/", controllers.HomeHandler(homeTmpl))
