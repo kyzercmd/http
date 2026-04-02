@@ -23,11 +23,14 @@ func main() {
 	homeTmpl := views.Must(views.ParseTemplate(filepath.Join("templates", "home.gohtml"))) 
 	
 	contactTmpl := views.Must(views.ParseTemplate(filepath.Join("templates", "contact.gohtml")))
+
+	aboutTmpl := views.Must(views.ParseTemplate(filepath.Join("templates", "about.gohtml")))
 	
 	//Patterns and handlerFunctions for those patterns
 	r.Get("/", controllers.HomeHandler(homeTmpl))
 	r.Get("/contact", controllers.ContactHandler(contactTmpl))
 	r.Get("/contact/{contactID}",  controllers.ContactHandler(contactTmpl))
+	r.Get("/about", controllers.AboutHandler(aboutTmpl))
 
 	//The NotFound page
 	r.NotFound(func(w http.ResponseWriter, r *http.Request){

@@ -23,3 +23,10 @@ func ContactHandler(tmpl views.Template) http.HandlerFunc{
 		fmt.Fprint(w, contactID)
 	}
 }
+
+func AboutHandler(tmpl views.Template) http.HandlerFunc{
+	return func(w http.ResponseWriter, r *http.Request){
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		tmpl.Execute(w, nil)
+	}
+}
